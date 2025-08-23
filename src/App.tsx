@@ -1,8 +1,14 @@
+import { Header } from './components/Header';
+import { InputBar } from './components/InputBar';
+import { ResultDisplay } from './components/ResultDisplay';
+
 function App() {
   return (
-    <>
-      <h1>Hola Mundo</h1>
-    </>
+    <main>
+      <Header />
+      <InputBar />
+      <ResultDisplay />
+    </main>
   )
 }
 
