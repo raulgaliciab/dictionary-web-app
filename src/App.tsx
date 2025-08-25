@@ -7,7 +7,7 @@ import { getWordData } from './utils/getWordData';
 const App = () => {
 
   const [ word, setWord ] = useState('');
-  const [ wordData, setWordData ] = useState('');
+  const [ wordData, setWordData ] = useState();
 
   useEffect(() => {
     if (word !== '') {
@@ -31,7 +31,7 @@ const App = () => {
     <main>
       <Header />
       <InputBar onSearch={ setWord }/>
-      <ResultDisplay />
+      {wordData && <ResultDisplay data={ wordData }/>}
     </main>
   )
 }
