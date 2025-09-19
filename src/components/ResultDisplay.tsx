@@ -1,26 +1,35 @@
 import { WordResult } from './WordResult'
 
 type Phonetic = {
-  audio: string
+    audio: string
+}
+
+type Meanings = {
+    synonyms: []
+    definitions: []
 }
 
 type WordData = {
-  word: string
-  phonetic: string
-  phonetics: Phonetic[]
+    word: string
+    phonetic: string
+    phonetics: Phonetic[]
+    meanings: Meanings[]
 }
 
 type ResultDisplayProps = {
-  data: WordData[]
+    data: WordData[]
 }
 
 
 export const ResultDisplay = ({ data }: ResultDisplayProps) => {
 
+    // Función para reproducir el audio de la palabra en caso de que exista
     const playAudio = () => {
         const audioElement = document.getElementById('audio') as HTMLAudioElement;
         if (audioElement) audioElement.play()
     }
+
+    const meanings = data[0].meanings;
 
     return (
         <section>
@@ -35,8 +44,17 @@ export const ResultDisplay = ({ data }: ResultDisplayProps) => {
                     onClick={ playAudio }
                 >▶️</button>
             </section>
-            <WordResult />
-            <WordResult />
+
+            <section>
+                {
+                    meanings.map((meaning, index) => (
+                        <WordResult
+                            key={ index }
+                            meaning={ meaning }
+                        />
+                    ))
+                }
+            </section>
         </section>
     )
 }

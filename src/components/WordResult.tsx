@@ -1,10 +1,38 @@
-export const WordResult = () => {
+type WordResultProps = {
+  meaning: {
+    partOfSpeech: string
+    definitions: Definition[]
+    synonyms: string[]
+  }
+}
+
+type Definition = {
+  definition: string
+  synonyms: string[]
+}
+
+export const WordResult = ( { meaning }: WordResultProps ) => {
+
   return (
     <section>
-        <h3>noun</h3>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad explicabo quo quia, adipisci vero porro cum deserunt aut facere, esse eos consequuntur culpa nemo molestias. Illo deserunt asperiores ratione voluptatem.
-        Dignissimos, blanditiis maiores debitis asperiores officiis voluptate numquam sapiente molestiae? Rem impedit, quaerat libero sed veniam odit ducimus repudiandae voluptas vitae doloremque velit aliquid. Eum id eligendi ut odit dolorem?</p>
-        <span>Synonyms</span>
+        <h3>{ meaning.partOfSpeech }</h3>
+
+        <ul>
+          {
+            meaning.definitions.slice(0, 3).map((def: Definition, index:number) => (
+              <li key={ index }>
+                {def.definition}
+              </li>
+            ))
+          }
+        </ul>
+        
+        {
+          meaning.synonyms.length > 0
+          &&
+          <span>Synonyms { meaning.synonyms.join(", ") }</span>
+        }
+
     </section>
   )
 }
